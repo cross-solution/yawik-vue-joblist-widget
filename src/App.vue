@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <YawikJobList :url="url" :page="page" :count="count" :title="title"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import YawikJobList from './components/YawikJobList.vue'
 
 export default {
   name: 'app',
+  props: ['url', 'title', 'page', 'count'],
   components: {
-    HelloWorld
+    YawikJobList
   }
 }
 </script>
