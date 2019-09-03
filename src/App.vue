@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <YawikJobList :url="url" :page="page" :count="count" :title="title"/>
+    <YawikJobList :remote="remote" :count="count" :widget-title="widgetTitle"/>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import YawikJobList from './components/YawikJobList.vue'
 
 export default {
   name: 'app',
-  props: ['url', 'title', 'page', 'count'],
+  props: ['remote', 'widget-title', 'count'],
   components: {
     YawikJobList
   }
@@ -21,7 +21,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
