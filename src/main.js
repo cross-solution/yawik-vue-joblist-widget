@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
+import YawikJobList from './YawikJobList.vue'
 import vueCustomElement from 'vue-custom-element'
 
 Vue.config.productionTip = false
 Vue.use(vueCustomElement)
 
-Vue.customElement('yawik-job-list', App)
+Vue.customElement('yawik-job-list', YawikJobList)

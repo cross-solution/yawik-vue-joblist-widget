@@ -2,24 +2,29 @@
     <div id="yawik-job-list">
         <h3>{{ widgetTitle ? widgetTitle : 'YAWIK Jobs List' }}</h3>
 
-        <div v-if="!error">
+        <div v-if="!error && result.totalPages > 1">
             <nav class="pagination">
                 <paginate
                     v-model="curpage"
                     :page-count="result.totalPages"
                     :page-range="5"
-                    :click-handler="load">
+                    :click-handler="load"
+                    prev-text="&lt;"
+                    next-text="&gt;">
                 </paginate>
             </nav>
         </div>
-        <div v-if="loading">Lädt...</div>
+        <div v-if="loading" class="yjl-loading-overlay">
+            <div class="yjl-lo-spinner-wrapper">
+                <moon-loader color="blue"></moon-loader>
+            </div>
+        </div>
         <div v-if="error">{{ errmsg }}</div>
-        <div v-if="!loading && !error">
+        <div v-if="result.totalPages > 0 && !error">
 
             <p>
-                Page {{ result.currentPage }} / {{ result.totalPages }} |
-                Showing {{ ((result.currentPage - 1) * result.jobsPerPage) }} - {{ ((result.currentPage - 1) * result.jobsPerPage) + result.count }}
-                of {{ result.total }}
+                {{ ((result.currentPage - 1) * result.jobsPerPage) }} - {{ ((result.currentPage - 1) * result.jobsPerPage) + result.count }}
+                / {{ result.total }}
             </p>
             <table class="yawik-job-list-items">
                 <tbody>
@@ -49,10 +54,11 @@
 <script>
 import axios from 'axios'
 import Paginate from 'vuejs-paginate'
+import { MoonLoader } from '@saeris/vue-spinners'
 
 export default {
     name: "YawikJobList",
-    components: { Paginate },
+    components: { Paginate, MoonLoader },
     data: function() {
         return {
             loading: true,
@@ -65,7 +71,7 @@ export default {
             curpage: 1
         }
     },
-    props: ['remote', 'widget-title', 'count'],
+    props: ['remote', 'widget-title', 'count', 'org'],
     mounted: function() {
         this.load()
     },
@@ -82,10 +88,12 @@ export default {
                 return;
             }
             var query = {
-                json: '1',
-                count: this.count ? this.count : 10,
-                page: this.curpage ? this.curpage : 1,
-            };
+                json: '1'
+            }
+            if (this.count) query.count = this.count
+            if (this.curpage) query.page = this.curpage
+            if (this.org) query.o = this.org
+
             /* Found on https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
              * Converts Object to query string
              * e.g. { param: 'value', other: 'test' } => 'param=value&other=test'
@@ -105,6 +113,26 @@ export default {
 </script>
 
 <style>
+#yawik-job-list {
+    text-align: center;
+    position: relative;
+    min-height: 235px;
+}
+#yawik-job-list .yjl-loading-overlay {
+    background-color: rgba(40,40,40,0);
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+#yawik-job-list .yjl-loading-overlay div.yjl-lo-spinner-wrapper {
+    margin: 5em auto;
+    display: inline-block;
+    padding: 5px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 40px;
+    box-shadow: 0 0 40px #777777;
+}
 #yawik-job-list .yawik-job-list-items {
     border-collapse: collapse;
 }
@@ -115,7 +143,7 @@ export default {
     border-bottom: 0px solid grey;
 }
 #yawik-job-list .yawik-job-list-items td {
-
+    text-align: left;
     vertical-align: middle;
 }
 #yawik-job-list .yawik-job-list-items td a {
@@ -128,13 +156,18 @@ export default {
     max-height: 60px;
 }
 #yawik-job-list .pagination ul {
-    display: flex;
+    display: inline-block;
     list-style:none;
+    /* center in chrome */
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-padding-start: 0;
 }
 #yawik-job-list .pagination ul li {
     display: flex;
     margin: 0;
     padding: 0;
+    float: left;
 }
 #yawik-job-list .pagination ul li a {
     position: relative;
@@ -152,6 +185,7 @@ export default {
 }
 #yawik-job-list .pagination ul li.disabled a {
     cursor: default;
+    color: lightgrey;
 }
 #yawik-job-list .pagination ul li.disabled a:hover {
     background-color: white;
