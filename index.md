@@ -4,7 +4,7 @@ Display your YAWIK jobs on any website using a vue-custom-component.
 
 ### Example
 
-![widget screenshot][static/images/widget-screenshot.png]
+![widget screenshot](static/images/widget-screenshot.png)
 
 ### Usage
 
