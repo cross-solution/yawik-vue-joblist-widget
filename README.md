@@ -1,4 +1,10 @@
-# vue-projekt
+# YAWIK Joblist Widget
+
+include job postings of a yawik instance into your homepage.
+
+# Demo
+
+https://cross-solution.github.io/yawik-vue-joblist-widget/
 
 ## Project setup
 ```
