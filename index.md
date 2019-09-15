@@ -6,7 +6,7 @@ Display your YAWIK jobs on any website using a vue-custom-component.
 
 <link rel="stylesheet" href="dist/0.1.0/yawik-job-list.css" />
 <script src="dist/0.1.0/yawik-job-list.js" type="text/javascript"></script>
-<yawik-job-list remote="https://upcoming.yawik.org/demo/de/jobboard" count="5"></yawik-job-list>
+<yawik-job-list remote="https://yawik.org/demo/de/jobboard" count="5"></yawik-job-list>
 
 ---
 
