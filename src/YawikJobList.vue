@@ -2,6 +2,11 @@
     <div id="yawik-job-list">
         <h3>{{ widgetTitle ? widgetTitle : 'YAWIK Jobs List' }}</h3>
 
+        <div v-if="fullTextEnabled">
+            <input name="test" type="text" v-model="q"/>
+            <button type="button" v-on:click="search">Search</button>
+        </div>
+
         <div v-if="!error && result.totalPages > 1">
             <nav class="pagination">
                 <paginate
@@ -63,6 +68,8 @@ export default {
         return {
             loading: true,
             error: false,
+            fullTextEnabled: true,
+            q: '',
             errmsg: '',
             jobs: [],
             result: {
@@ -76,6 +83,9 @@ export default {
         this.load()
     },
     methods: {
+        search: function(){
+            this.load();
+        },
         load: function(pageNum) {
             this.curpage = pageNum;
             this.loading = true;
@@ -93,6 +103,7 @@ export default {
             if (this.count) query.count = this.count
             if (this.curpage) query.page = this.curpage
             if (this.org) query.o = this.org
+            if ('' !== this.q) query.q = this.q
 
             /* Found on https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
              * Converts Object to query string
@@ -198,4 +209,9 @@ export default {
     border-top-right-radius: 0.25em;
     border-bottom-right-radius: 0.25em;
 }
+
+#yawik-job-list input {
+    margin-bottom: 8px;
+}
+
 </style>
