@@ -3,10 +3,9 @@
         <h3>{{ widgetTitle ? widgetTitle : 'YAWIK Jobs List' }}</h3>
 
         <div v-if="fullTextEnabled">
-            <input name="test" type="text" v-model="q"/>
+            <input name="test" type="text" v-on:keyup.enter="search" v-model="q"/>
             <button type="button" v-on:click="search">Search</button>
         </div>
-
         <div v-if="!error && result.totalPages > 1">
             <nav class="pagination">
                 <paginate
@@ -26,7 +25,6 @@
         </div>
         <div v-if="error">{{ errmsg }}</div>
         <div v-if="result.totalPages > 0 && !error">
-
             <p>
                 {{ ((result.currentPage - 1) * result.jobsPerPage) }} - {{ ((result.currentPage - 1) * result.jobsPerPage) + result.count }}
                 / {{ result.total }}
@@ -63,7 +61,10 @@ import { MoonLoader } from '@saeris/vue-spinners'
 
 export default {
     name: "YawikJobList",
-    components: { Paginate, MoonLoader },
+    components: { 
+        Paginate, 
+        MoonLoader 
+    },
     data: function() {
         return {
             loading: true,
@@ -123,95 +124,10 @@ export default {
 }
 </script>
 
-<style>
-#yawik-job-list {
-    text-align: center;
-    position: relative;
-    min-height: 235px;
-}
-#yawik-job-list .yjl-loading-overlay {
-    background-color: rgba(40,40,40,0);
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-}
-#yawik-job-list .yjl-loading-overlay div.yjl-lo-spinner-wrapper {
-    margin: 5em auto;
-    display: inline-block;
-    padding: 5px;
-    background-color: rgba(255,255,255,0.7);
-    border-radius: 40px;
-    box-shadow: 0 0 40px #777777;
-}
-#yawik-job-list .yawik-job-list-items {
-    border-collapse: collapse;
-}
-#yawik-job-list .yawik-job-list-items tr {
-    border-bottom: 1px solid grey;
-}
-#yawik-job-list .yawik-job-list-items tr:last-child {
-    border-bottom: 0px solid grey;
-}
-#yawik-job-list .yawik-job-list-items td {
-    text-align: left;
-    vertical-align: middle;
-}
-#yawik-job-list .yawik-job-list-items td a {
-    display: block;
-    padding: 1.5em;
+<style lang="scss" scoped>
+@import 'layout.scss';
 
+h3 {
+    color: #123;    
 }
-#yawik-job-list .yawik-job-list-items img {
-    max-width: 120px;
-    max-height: 60px;
-}
-#yawik-job-list .pagination ul {
-    display: inline-block;
-    list-style:none;
-    /* center in chrome */
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-padding-start: 0;
-}
-#yawik-job-list .pagination ul li {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-#yawik-job-list .pagination ul li a {
-    position: relative;
-    margin: 0px 0px 0px -1px;
-    padding: 0.3em 0.7em;
-    border: 1px solid grey;
-    cursor: pointer;
-}
-#yawik-job-list .pagination ul li.active a {
-    background-color: lightblue;
-    color: blue;
-}
-#yawik-job-list .pagination ul li a:hover {
-    background-color: lightgrey;
-}
-#yawik-job-list .pagination ul li.disabled a {
-    cursor: default;
-    color: lightgrey;
-}
-#yawik-job-list .pagination ul li.disabled a:hover {
-    background-color: white;
-}
-#yawik-job-list .pagination ul li:first-child a {
-    border-top-left-radius: 0.25em;
-    border-bottom-left-radius: 0.25em;
-}
-#yawik-job-list .pagination ul li:last-child a {
-    border-top-right-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;
-}
-
-#yawik-job-list input {
-    margin-bottom: 8px;
-}
-
 </style>

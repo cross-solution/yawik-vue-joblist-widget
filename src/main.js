@@ -1,8 +1,17 @@
 import Vue from 'vue'
 import YawikJobList from './YawikJobList.vue'
-import vueCustomElement from 'vue-custom-element'
+import wrap from '@vue/web-component-wrapper';
+// import Buefy from 'buefy'
 
 Vue.config.productionTip = false
-Vue.use(vueCustomElement)
 
-Vue.customElement('yawik-job-list', YawikJobList)
+// Vue.use(Buefy,{
+//     defaultIconPack: 'fas',
+//     defaultContainerElement: '#yawik-job.list'
+// })
+
+
+const app = wrap(Vue, YawikJobList);
+window.customElements.define('yawik-job-list', app, {shadow: true});
+
+
