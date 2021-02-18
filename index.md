@@ -4,16 +4,16 @@ Display your YAWIK jobs on any website using a vue-custom-component.
 
 ### Example
 
-<link rel="stylesheet" href="dist/0.1.0/yawik-job-list.css" />
-<script src="dist/0.1.0/yawik-job-list.js" type="text/javascript"></script>
+<link rel="stylesheet" href="dist/0.2.0/yawik-job-list.css" />
+<script src="dist/0.2.0/yawik-job-list.js" type="text/javascript"></script>
 <yawik-job-list remote="https://yawik.org/demo/de/jobboard" count="5"></yawik-job-list>
 
 ### Usage
 
 Include the following html snippets in your site:
 ``` html
-<link rel="stylesheet" href="https://cross-solution.github.io/yawik-vue-joblist-widget/dist/0.1.0/yawik-job-list.css" />
-<script src="https://cross-solution.github.io/yawik-vue-joblist-widget/dist/0.1.0/yawik-job-list.js"></script>
+<link rel="stylesheet" href="https://cross-solution.github.io/yawik-vue-joblist-widget/dist/0.2.0/yawik-job-list.css" />
+<script src="https://cross-solution.github.io/yawik-vue-joblist-widget/dist/0.2.0/yawik-job-list.js"></script>
 <yawik-job-list remote="[yawik-instance/jobboard]"></yawik-job-list>
 ```
 
@@ -44,6 +44,11 @@ The following CSS ids and classes are used:
 
 
 ### Files
+
+#### 0.2
+
+* [yawik-job-list.js](dist/0.2.0/yawik-job-list.js)
+* [yawik-job-list.css](dist/0.2.0/yawik-job-list.css)
 
 #### 0.1
 
