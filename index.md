@@ -19,12 +19,14 @@ Include the following html snippets in your site:
 
 Available attributes:
 
-| Attribute | Description | 
-| :--- | :--- |
-| remote | URL to the yawik jobboard. e.g. https://yawik.org/demo/de/jobboard |
-| count | Amount of jobs displayed at once. | 
-| widget-title | Headline displayed above the jobs (default: YAWIK Job List) | 
-| org | ID of an organization. If given, only jobs from this organization are displayed | 
+| Attribute    | Description                                                                      | 
+| :---         | :---                                                                             |
+| remote       | URL to the yawik jobboard. e.g. https://yawik.org/demo/de/jobboard               |
+| count        | Amount of jobs displayed at once.                                                | 
+| widget-title | Headline displayed above the jobs (default: YAWIK Job List)                      | 
+| org          | ID of an organization. If given, only jobs from this organization are displayed  | 
+| job-on-click | default: "_blank"                                                                |
+| hide-logo    | default: "false. Hide logo of a company.                                         |
 
 ### Customize CSS
 
@@ -32,12 +34,12 @@ This widget is rendered in a `div` container with the id `yawik-job-list`.
 
 The following CSS ids and classes are used:
 
-| CSS selector | Description |
-| :--- | :--- |
-| #yawik-job-list | The main widget container |
-| #yawik-job-list > h3 | The main headline |
-| .pagination | The pagination bar. This is rendered as an unordered list, where each link is separate list item |
-| .pagination .active | The current active link |
+| CSS selector          | Description |
+| :---                  | :--- |
+| #yawik-job-list       | The main widget container |
+| #yawik-job-list > h3  | The main headline |
+| .pagination           | The pagination bar. This is rendered as an unordered list, where each link is separate list item |
+| .pagination .active   | The current active link |
 | .yawik-job-list-items | The job list. Rendered as table where each row is a job posting |
 
 
