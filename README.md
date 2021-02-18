@@ -13,12 +13,12 @@ please visit the demo site: https://cross-solution.github.io/yawik-vue-joblist-w
 
 Checkout the repository, then run
 ```
-npm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
@@ -27,7 +27,7 @@ This section describes the processes to build and distribute the production file
 and is targeted mainly at maintainers of this project.
 
 ```
-npm run build
+yarn build
 ```
 
 The demo site is hosted as a Github page from the branch `gh-pages`.
