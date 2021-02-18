@@ -1,7 +1,6 @@
 <template>
     <div id="yawik-job-list">
         <h3>{{ widgetTitle ? widgetTitle : 'YAWIK Jobs List' }}</h3>
-
         <div v-if="fullTextEnabled">
             <input name="test" type="text" v-model="q"/>
             <button type="button" v-on:click="search">Search</button>
@@ -34,19 +33,19 @@
             <table class="yawik-job-list-items">
                 <tbody>
                     <tr v-for="job in result.jobs" :key="job.id">
-                        <td>
-                            <a :href="job.link">{{ job.title }}</a>
+                        <td class="job-title">
+                            <a :href="job.link" :target="jobOnClick">{{ job.title }}</a>
                         </td>
-                        <td width="20%">
+                        <td v-if="false === hideLogo" class="job-org-logo">
                             <img v-if="job.organizationLogo" :src="job.organizationLogo" :alt="job.organization"/>
                             <span v-else>{{ job.organization }}</span>
                         </td>
-                        <td width="15%" v-if="job.locations.length">
+                        <td v-if="job.locations.length" class="job-location">
                             <div v-for="loc in job.locations" :key="loc.city">
                                 {{ loc.city ? loc.city : loc.region }}<br>
                             </div>
                         </td>
-                        <td width="15%" v-else>
+                        <td v-else>
                             {{ job.location }}
                         </td>
                     </tr>
@@ -78,7 +77,19 @@ export default {
             curpage: 1
         }
     },
-    props: ['remote', 'widget-title', 'count', 'org'],
+    props: {
+      remote: String,
+      widgetTitle: String,
+      count: Number,
+      org: String,
+      jobOnClick: {
+        type: String,
+        default: "_blank"
+      },
+      hideLogo: {
+        type: Boolean
+      }
+    },
     mounted: function() {
         this.load()
     },
@@ -212,6 +223,10 @@ export default {
 
 #yawik-job-list input {
     margin-bottom: 8px;
+}
+
+.yawik-job-list-items {
+  width: 100%;
 }
 
 </style>
