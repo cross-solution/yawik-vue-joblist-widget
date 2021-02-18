@@ -27,7 +27,7 @@
         <div v-if="result.totalPages > 0 && !error">
 
             <p>
-                {{ ((result.currentPage - 1) * result.jobsPerPage) }} - {{ ((result.currentPage - 1) * result.jobsPerPage) + result.count }}
+                {{ ( 1 + (result.currentPage - 1) * result.jobsPerPage) }} - {{ ((result.currentPage - 1) * result.jobsPerPage) + result.count }}
                 / {{ result.total }}
             </p>
             <table class="yawik-job-list-items">
